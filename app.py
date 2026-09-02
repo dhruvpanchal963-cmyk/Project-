@@ -1,4 +1,4 @@
-from pathlib import Path
+
 import io
 import numpy as np
 import pandas as pd
@@ -47,8 +47,9 @@ st.markdown(
     .stAlert p, .stInfo p, .stSuccess p, .stWarning p, .stError p { color: #101828 !important; }
     .stCaption, [data-testid="stCaptionContainer"] { color: #475467 !important; }
     .block-container { padding-top: 1.35rem; padding-bottom: 2.5rem; max-width: 1500px; }
-    [data-testid="stSidebar"] { background: #101828; }
-    [data-testid="stSidebar"] * { color: #f8fafc; }
+    [data-testid="stSidebar"] { background: #101828 !important; }
+    [data-testid="stSidebar"] * { color: #f8fafc !important; }
+    [data-testid="stSidebar"] input, [data-testid="stSidebar"] textarea { color: #101828 !important; background: #ffffff !important; }
     .hero {
         padding: 1.25rem 1.4rem;
         border-radius: 18px;
@@ -57,9 +58,10 @@ st.markdown(
         margin-bottom: 1.0rem;
         box-shadow: 0 10px 30px rgba(15, 23, 42, .10);
     }
-    .hero h1 { margin: 0; font-size: 2rem; }
-    .hero p { margin: .45rem 0 0; color: #cbd5e1; }
-    .section-title { font-size: 1.25rem; font-weight: 750; margin: .35rem 0 .5rem; color: #111827; }
+    .hero, .hero * { color: #ffffff !important; }
+    .hero h1 { margin: 0; font-size: 2rem; color: #ffffff !important; }
+    .hero p { margin: .45rem 0 0; color: #dbe4f0 !important; }
+    .section-title { font-size: 1.25rem; font-weight: 750; margin: .35rem 0 .5rem; color: #111827 !important; }
     .insight-card {
         padding: 1rem 1.05rem;
         border-radius: 14px;
@@ -78,7 +80,14 @@ st.markdown(
         box-shadow: 0 4px 16px rgba(15,23,42,.04);
     }
     div[data-testid="stDataFrame"] { border-radius: 12px; overflow: hidden; }
-    .small-note { color:#667085; font-size:.86rem; }
+    .small-note { color:#667085 !important; font-size:.86rem; }
+    /* Keep Streamlit/Plotly text readable without globally recoloring SVGs. */
+    .js-plotly-plot .plotly .legendtext,
+    .js-plotly-plot .plotly .g-xtitle text,
+    .js-plotly-plot .plotly .g-ytitle text,
+    .js-plotly-plot .plotly .xtick text,
+    .js-plotly-plot .plotly .ytick text,
+    .js-plotly-plot .plotly .annotation-text { fill: #101828 !important; color: #101828 !important; }
     </style>
     """,
     unsafe_allow_html=True,
@@ -142,6 +151,7 @@ def style_fig(fig, height=390):
         title_font=dict(size=18, color="#101828"),
         hoverlabel=dict(bgcolor="#101828", font_color="#FFFFFF", font_size=13),
         legend_title_text="",
+        legend=dict(font=dict(color="#101828", size=13), title_font=dict(color="#101828")),
     )
     fig.update_xaxes(showgrid=False, zeroline=False, tickfont=dict(color="#344054"), title_font=dict(color="#101828"))
     fig.update_yaxes(gridcolor="#e5e7eb", zeroline=False, tickfont=dict(color="#344054"), title_font=dict(color="#101828"))
