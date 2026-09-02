@@ -1,4 +1,3 @@
-
 import io
 import numpy as np
 import pandas as pd
@@ -24,31 +23,19 @@ st.markdown(
     """
     <style>
     .stApp { background: #f6f8fb !important; color: #101828 !important; }
-    html, body { color: #101828 !important; }
-    /* MAIN CONTENT ONLY: do not style sidebar widgets with global selectors. */
-    [data-testid="stMain"] .stMarkdown,
-    [data-testid="stMain"] .stText,
-    [data-testid="stMain"] label,
-    [data-testid="stMain"] p { color: #101828 !important; }
+    [data-testid="stMain"] .stMarkdown, [data-testid="stMain"] .stText, [data-testid="stMain"] label, [data-testid="stMain"] p { color: #101828 !important; }
     [data-testid="stMain"] [data-testid="stMarkdownContainer"] * { color: #101828 !important; }
     [data-testid="stMain"] [data-testid="stWidgetLabel"] * { color: #101828 !important; }
-    [data-testid="stMain"] input,
-    [data-testid="stMain"] textarea { color: #101828 !important; background: #ffffff !important; }
-    [data-testid="stMain"] input::placeholder,
-    [data-testid="stMain"] textarea::placeholder { color: #667085 !important; opacity: 1 !important; }
+    [data-testid="stMain"] input, [data-testid="stMain"] textarea { color: #101828 !important; background: #ffffff !important; }
+    [data-testid="stMain"] input::placeholder, [data-testid="stMain"] textarea::placeholder { color: #667085 !important; opacity: 1 !important; }
     .stApp header { background: transparent !important; }
     [data-testid="stHeader"] { background: transparent !important; }
     [data-testid="stToolbar"] { color: #101828 !important; }
-    [data-testid="stMain"] .stSelectbox label,
-    [data-testid="stMain"] .stMultiSelect label,
-    [data-testid="stMain"] .stSlider label,
-    [data-testid="stMain"] .stRadio label,
-    [data-testid="stMain"] .stFileUploader label { color: #101828 !important; font-weight: 650 !important; }
+    [data-testid="stMain"] .stSelectbox label, [data-testid="stMain"] .stMultiSelect label, [data-testid="stMain"] .stSlider label, [data-testid="stMain"] .stRadio label, [data-testid="stMain"] .stFileUploader label { color: #101828 !important; font-weight: 650 !important; }
     [data-testid="stMain"] [data-baseweb="select"] * { color: #101828 !important; }
     [data-testid="stMain"] [data-baseweb="popover"] * { color: #101828 !important; }
-    [data-testid="stMain"] .stButton button,
-    [data-testid="stMain"] .stDownloadButton button { color: #101828 !important; background: #ffffff !important; border: 1px solid #d0d5dd !important; }
-    .stMetric label, .stMetric [data-testid="stMetricValue"], .stMetric [data-testid="stMetricDelta"] { color: #101828 !important; }
+    [data-testid="stMain"] .stButton button, [data-testid="stMain"] .stDownloadButton button { color: #101828 !important; background: #ffffff !important; border: 1px solid #d0d5dd !important; }
+    [data-testid="stMain"] .stMetric label, [data-testid="stMain"] .stMetric [data-testid="stMetricValue"], [data-testid="stMain"] .stMetric [data-testid="stMetricDelta"] { color: #101828 !important; }
     [data-testid="stDataFrame"] { background: #ffffff !important; }
     [data-testid="stDataFrame"] * { color: #101828 !important; }
     [data-testid="stDataFrame"] [role="columnheader"] { color: #101828 !important; background: #f8fafc !important; }
@@ -58,30 +45,16 @@ st.markdown(
     .stAlert p, .stInfo p, .stSuccess p, .stWarning p, .stError p { color: #101828 !important; }
     .stCaption, [data-testid="stCaptionContainer"] { color: #475467 !important; }
     .block-container { padding-top: 1.35rem; padding-bottom: 2.5rem; max-width: 1500px; }
-    /* SIDEBAR: explicit selectors with enough specificity to win over Streamlit defaults. */
     [data-testid="stSidebar"] { background: #101828 !important; }
-    [data-testid="stSidebar"] .stMarkdown,
-    [data-testid="stSidebar"] .stMarkdown p,
-    [data-testid="stSidebar"] .stMarkdown h1,
-    [data-testid="stSidebar"] .stMarkdown h2,
-    [data-testid="stSidebar"] .stMarkdown h3,
-    [data-testid="stSidebar"] .stMarkdown h4,
-    [data-testid="stSidebar"] .stCaption,
-    [data-testid="stSidebar"] [data-testid="stCaptionContainer"],
-    [data-testid="stSidebar"] label,
-    [data-testid="stSidebar"] [data-testid="stWidgetLabel"] * { color: #f8fafc !important; }
     [data-testid="stSidebar"] [data-testid="stMarkdownContainer"] * { color: #f8fafc !important; }
-    [data-testid="stSidebar"] .stRadio label,
-    [data-testid="stSidebar"] .stRadio label p,
-    [data-testid="stSidebar"] .stRadio label span { color: #f8fafc !important; }
-    [data-testid="stSidebar"] .stFileUploader label,
-    [data-testid="stSidebar"] .stFileUploader label * { color: #f8fafc !important; }
-    [data-testid="stSidebar"] .stButton button,
-    [data-testid="stSidebar"] .stDownloadButton button { color: #f8fafc !important; background: #1f2937 !important; border: 1px solid #475467 !important; }
-    [data-testid="stSidebar"] input,
-    [data-testid="stSidebar"] textarea { color: #101828 !important; background: #ffffff !important; }
-    [data-testid="stSidebar"] [data-testid="stFileUploaderDropzone"] { background: #111827 !important; border-color: #374151 !important; }
-    [data-testid="stSidebar"] [data-testid="stFileUploaderDropzone"] * { color: #f8fafc !important; }
+    [data-testid="stSidebar"] [data-testid="stWidgetLabel"] * { color: #f8fafc !important; }
+    [data-testid="stSidebar"] label, [data-testid="stSidebar"] p, [data-testid="stSidebar"] span { color: #f8fafc !important; }
+    [data-testid="stSidebar"] .stCaption, [data-testid="stSidebar"] [data-testid="stCaptionContainer"] { color: #cbd5e1 !important; }
+    [data-testid="stSidebar"] input, [data-testid="stSidebar"] textarea { color: #101828 !important; background: #ffffff !important; }
+    [data-testid="stSidebar"] button { color: #f8fafc !important; }
+    [data-testid="stSidebar"] .stFileUploader button { color: #f8fafc !important; background: #202938 !important; border-color: #475467 !important; }
+    [data-testid="stSidebar"] [role="radiogroup"] label { color: #f8fafc !important; }
+    [data-testid="stSidebar"] [role="radiogroup"] label p, [data-testid="stSidebar"] [role="radiogroup"] label span { color: #f8fafc !important; }
     .hero {
         padding: 1.25rem 1.4rem;
         border-radius: 18px;
@@ -126,8 +99,7 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-DATA_FILE = os.path.join(BASE_DIR, "FITX_UX_UI_Analysis_Dashboard_Aligned.xlsx")
+DATA_FILE = "FITX_UX_UI_Analysis_Dashboard_Aligned.xlsx"
 
 @st.cache_data(show_spinner=False)
 def load_excel_from_bytes(raw: bytes):
@@ -205,12 +177,12 @@ if uploaded is not None:
     source_name = uploaded.name
 else:
     local_path = DATA_FILE
-    if os.path.isfile(local_path):
+    try:
         sheets = load_excel_from_path(local_path)
-        source_name = os.path.basename(local_path)
-    else:
+        source_name = DATA_FILE
+    except (FileNotFoundError, OSError, ValueError):
         st.error(
-            f"Data file not found. Add `{os.path.basename(DATA_FILE)}` beside app.py in your GitHub repository, "
+            f"Data file not found. Add `{DATA_FILE}` beside app.py in your GitHub repository, "
             "or upload the workbook from the sidebar."
         )
         st.stop()
