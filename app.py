@@ -1,4 +1,4 @@
-
+import os
 import io
 import numpy as np
 import pandas as pd
@@ -58,9 +58,10 @@ st.markdown(
         margin-bottom: 1.0rem;
         box-shadow: 0 10px 30px rgba(15, 23, 42, .10);
     }
-    .hero, .hero * { color: #ffffff !important; }
-    .hero h1 { margin: 0; font-size: 2rem; color: #ffffff !important; }
-    .hero p { margin: .45rem 0 0; color: #dbe4f0 !important; }
+    .stApp [data-testid="stMarkdownContainer"] .hero,
+    .stApp [data-testid="stMarkdownContainer"] .hero * { color: #ffffff !important; }
+    .stApp [data-testid="stMarkdownContainer"] .hero h1 { margin: 0; font-size: 2rem; color: #ffffff !important; }
+    .stApp [data-testid="stMarkdownContainer"] .hero p { margin: .45rem 0 0; color: #dbe4f0 !important; }
     .section-title { font-size: 1.25rem; font-weight: 750; margin: .35rem 0 .5rem; color: #111827 !important; }
     .insight-card {
         padding: 1rem 1.05rem;
@@ -93,8 +94,8 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-BASE_DIR = Path(__file__).resolve().parent
-DATA_FILE = BASE_DIR / "FITX_UX_UI_Analysis_Dashboard_Aligned.xlsx"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_FILE = os.path.join(BASE_DIR, "FITX_UX_UI_Analysis_Dashboard_Aligned.xlsx")
 
 @st.cache_data(show_spinner=False)
 def load_excel_from_bytes(raw: bytes):
@@ -172,12 +173,12 @@ if uploaded is not None:
     source_name = uploaded.name
 else:
     local_path = DATA_FILE
-    if local_path.exists():
-        sheets = load_excel_from_path(str(local_path))
-        source_name = local_path.name
+    if os.path.isfile(local_path):
+        sheets = load_excel_from_path(local_path)
+        source_name = os.path.basename(local_path)
     else:
         st.error(
-            f"Data file not found. Add `{DATA_FILE.name}` beside app.py in your GitHub repository, "
+            f"Data file not found. Add `{os.path.basename(DATA_FILE)}` beside app.py in your GitHub repository, "
             "or upload the workbook from the sidebar."
         )
         st.stop()
