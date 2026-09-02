@@ -1,4 +1,4 @@
-import os
+
 import io
 import numpy as np
 import pandas as pd
@@ -25,18 +25,29 @@ st.markdown(
     <style>
     .stApp { background: #f6f8fb !important; color: #101828 !important; }
     html, body { color: #101828 !important; }
-    .stApp .stMarkdown, .stApp .stText, .stApp label, .stApp p { color: #101828 !important; }
-    .stApp [data-testid="stMarkdownContainer"] * { color: #101828 !important; }
-    .stApp [data-testid="stWidgetLabel"] * { color: #101828 !important; }
-    .stApp input, .stApp textarea { color: #101828 !important; background: #ffffff !important; }
-    .stApp input::placeholder, .stApp textarea::placeholder { color: #667085 !important; opacity: 1 !important; }
+    /* MAIN CONTENT ONLY: do not style sidebar widgets with global selectors. */
+    [data-testid="stMain"] .stMarkdown,
+    [data-testid="stMain"] .stText,
+    [data-testid="stMain"] label,
+    [data-testid="stMain"] p { color: #101828 !important; }
+    [data-testid="stMain"] [data-testid="stMarkdownContainer"] * { color: #101828 !important; }
+    [data-testid="stMain"] [data-testid="stWidgetLabel"] * { color: #101828 !important; }
+    [data-testid="stMain"] input,
+    [data-testid="stMain"] textarea { color: #101828 !important; background: #ffffff !important; }
+    [data-testid="stMain"] input::placeholder,
+    [data-testid="stMain"] textarea::placeholder { color: #667085 !important; opacity: 1 !important; }
     .stApp header { background: transparent !important; }
     [data-testid="stHeader"] { background: transparent !important; }
     [data-testid="stToolbar"] { color: #101828 !important; }
-    .stSelectbox label, .stMultiSelect label, .stSlider label, .stRadio label, .stFileUploader label { color: #101828 !important; font-weight: 650 !important; }
-    [data-baseweb="select"] * { color: #101828 !important; }
-    [data-baseweb="popover"] * { color: #101828 !important; }
-    .stButton button, .stDownloadButton button { color: #101828 !important; background: #ffffff !important; border: 1px solid #d0d5dd !important; }
+    [data-testid="stMain"] .stSelectbox label,
+    [data-testid="stMain"] .stMultiSelect label,
+    [data-testid="stMain"] .stSlider label,
+    [data-testid="stMain"] .stRadio label,
+    [data-testid="stMain"] .stFileUploader label { color: #101828 !important; font-weight: 650 !important; }
+    [data-testid="stMain"] [data-baseweb="select"] * { color: #101828 !important; }
+    [data-testid="stMain"] [data-baseweb="popover"] * { color: #101828 !important; }
+    [data-testid="stMain"] .stButton button,
+    [data-testid="stMain"] .stDownloadButton button { color: #101828 !important; background: #ffffff !important; border: 1px solid #d0d5dd !important; }
     .stMetric label, .stMetric [data-testid="stMetricValue"], .stMetric [data-testid="stMetricDelta"] { color: #101828 !important; }
     [data-testid="stDataFrame"] { background: #ffffff !important; }
     [data-testid="stDataFrame"] * { color: #101828 !important; }
@@ -47,9 +58,30 @@ st.markdown(
     .stAlert p, .stInfo p, .stSuccess p, .stWarning p, .stError p { color: #101828 !important; }
     .stCaption, [data-testid="stCaptionContainer"] { color: #475467 !important; }
     .block-container { padding-top: 1.35rem; padding-bottom: 2.5rem; max-width: 1500px; }
+    /* SIDEBAR: explicit selectors with enough specificity to win over Streamlit defaults. */
     [data-testid="stSidebar"] { background: #101828 !important; }
-    [data-testid="stSidebar"] * { color: #f8fafc !important; }
-    [data-testid="stSidebar"] input, [data-testid="stSidebar"] textarea { color: #101828 !important; background: #ffffff !important; }
+    [data-testid="stSidebar"] .stMarkdown,
+    [data-testid="stSidebar"] .stMarkdown p,
+    [data-testid="stSidebar"] .stMarkdown h1,
+    [data-testid="stSidebar"] .stMarkdown h2,
+    [data-testid="stSidebar"] .stMarkdown h3,
+    [data-testid="stSidebar"] .stMarkdown h4,
+    [data-testid="stSidebar"] .stCaption,
+    [data-testid="stSidebar"] [data-testid="stCaptionContainer"],
+    [data-testid="stSidebar"] label,
+    [data-testid="stSidebar"] [data-testid="stWidgetLabel"] * { color: #f8fafc !important; }
+    [data-testid="stSidebar"] [data-testid="stMarkdownContainer"] * { color: #f8fafc !important; }
+    [data-testid="stSidebar"] .stRadio label,
+    [data-testid="stSidebar"] .stRadio label p,
+    [data-testid="stSidebar"] .stRadio label span { color: #f8fafc !important; }
+    [data-testid="stSidebar"] .stFileUploader label,
+    [data-testid="stSidebar"] .stFileUploader label * { color: #f8fafc !important; }
+    [data-testid="stSidebar"] .stButton button,
+    [data-testid="stSidebar"] .stDownloadButton button { color: #f8fafc !important; background: #1f2937 !important; border: 1px solid #475467 !important; }
+    [data-testid="stSidebar"] input,
+    [data-testid="stSidebar"] textarea { color: #101828 !important; background: #ffffff !important; }
+    [data-testid="stSidebar"] [data-testid="stFileUploaderDropzone"] { background: #111827 !important; border-color: #374151 !important; }
+    [data-testid="stSidebar"] [data-testid="stFileUploaderDropzone"] * { color: #f8fafc !important; }
     .hero {
         padding: 1.25rem 1.4rem;
         border-radius: 18px;
